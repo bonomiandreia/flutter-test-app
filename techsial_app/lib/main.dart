@@ -75,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 padding: EdgeInsets.all(16.0),
@@ -88,16 +89,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Expanded(
-                child: ListView(
-                  children: listOfArrays
-                      .map(
-                        (array) => Container(
-                          padding: EdgeInsets.all(16.0),
-                          child: Text(array.toString()),
-                        ),
-                      )
-                      .toList(),
-                ),
+                child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: ListView(
+                      children: listOfArrays
+                          .map(
+                            (array) => Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(0)),
+                              padding: EdgeInsets.all(16.0),
+                              child: Text(array.toString()),
+                            ),
+                          )
+                          .toList(),
+                    )),
               ),
             ],
           )),
