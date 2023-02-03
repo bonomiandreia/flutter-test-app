@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(0)),
-                              padding: EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Text(array.toString()),
                             ),
                           )
