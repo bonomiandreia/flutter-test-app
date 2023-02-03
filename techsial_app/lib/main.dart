@@ -57,16 +57,8 @@ List<List<int>> listOfArrays = [
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(
           widget.title,
           style: TextStyle(color: Colors.greenbrand.shade900),
@@ -75,14 +67,40 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: 0.0,
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.purple, Colors.pink],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white, Colors.greenbrand.shade400],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
           ),
-        ),
-      ),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'List Numbers',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.greenbrand.shade900,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ListView(
+                  children: listOfArrays
+                      .map(
+                        (array) => Container(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(array.toString()),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
+          )),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
