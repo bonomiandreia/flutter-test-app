@@ -13,11 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Healthy Food',
       theme: ThemeData(
         primarySwatch: Colors.greenbrand,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'NEWS'),
     );
   }
 }
@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
         "source": {"id": null, "name": "Forbes"},
         "author":
             "Robin Gagnon, Forbes Councils Member, \n Robin Gagnon, Forbes Councils Member\n https://www.forbes.com/sites/forbesbusinesscouncil/people/robingagnon/",
-        "title": "Comparing Franchise Vs. Independent Restaurants For 2023",
+        "c": "Comparing Franchise Vs. Independent Restaurants For 2023",
         "description":
             "Based on several key factors, will franchise or independent restaurants be better positioned in 2023? Here is a comparison.",
         "url":
@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.white, Colors.greenbrand.shade400],
+              colors: [Colors.white, Colors.greenbrand.shade100],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -128,9 +128,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: <Widget>[
                                   Image(
                                     image: NetworkImage(
-                                        answers[0]['urlToImage'] as String),
+                                        array['urlToImage'] as String),
                                   ),
-                                  Text(array['description'].toString()),
+                                  Text(array['title'].toString()),
                                 ],
                               ),
                             ),
