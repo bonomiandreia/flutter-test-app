@@ -116,7 +116,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           horizontal: 16.0, vertical: 10.0),
                       child: ListView(children: [
                         ...answers.map<Widget>((array) {
-                          return Container();
+                          return Container(
+                            child: Column(children: [
+                              Image(
+                                  image: NetworkImage(
+                                      array['urlToImage'].toString())),
+                              Text(array['title'].toString())
+                            ]),
+                          );
                         }).toList()
                       ])))
             ],
