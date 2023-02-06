@@ -118,14 +118,34 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: ListView(children: [
                         ...answers.map<Widget>((array) {
                           var index = answers.indexOf(array);
-                          return Container(
-                            child: Column(children: [
-                              Image(
-                                  image: NetworkImage(
-                                      array['urlToImage'].toString())),
-                              Text(array['title'].toString()),
-                              Text(index.toString())
-                            ]),
+                          if (index == 0) {
+                            return Container(
+                                child: Column(
+                              children: [
+                                Image(
+                                    image: NetworkImage(
+                                        array['urlToImage'].toString())),
+                                Text(array['title'].toString()),
+                                Text(index.toString())
+                              ],
+                            ));
+                          }
+                          return Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Image(
+                                    image: NetworkImage(
+                                        array['urlToImage'].toString()),
+                                    fit: BoxFit.fill,
+                                    height: 100,
+                                  )
+                                ],
+                              ),
+                              Column(
+                                children: [Text(array['title'].toString())],
+                              )
+                            ],
                           );
                         }).toList()
                       ])))
