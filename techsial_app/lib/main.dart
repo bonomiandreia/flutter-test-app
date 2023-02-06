@@ -13,7 +13,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,12 +36,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  int _counter = 0;
+  int _selectedIndex = 0;
+
   Widget build(BuildContext context) {
     void initState() {
       super.initState();
     }
 
-    int _selectedIndex = 0;
     final menuScreens = [
       HomeNews(),
       RecipesWidget(),
@@ -70,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
           onTabChange: (index) {
             setState(() {
               _selectedIndex = index;
-              print(_selectedIndex);
             });
           },
         ),
@@ -84,11 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    menuScreens[_selectedIndex],
-                    Text('Value (in parent) = $_selectedIndex')
-                  ],
+                child: Expanded(
+                  child: menuScreens[_selectedIndex],
                 ))));
   }
 }

@@ -31,7 +31,7 @@ class _HomeState extends State<HomeNews> {
 
   @override
   Widget build(BuildContext context) {
-    listArticles = listOfArrays['articles'];
+    listArticles = listOfArrays['articles'] ?? [] as List;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
