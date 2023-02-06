@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:techsial_app/home.dart';
+import 'package:techsial_app/recipes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,30 +36,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Map listOfArrays = {};
-  var listArticles = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _getDataListNews();
-  }
-
-  void _getDataListNews() async {
-    final response = await http.get(Uri.parse(
-        'https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=a275424604ae48368a0cb5a90f2bdeb7'));
-    if (response.statusCode == 200) {
-      setState(() {
-        listOfArrays = json.decode(response.body);
-      });
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    listArticles = listOfArrays['articles'];
+    void initState() {
+      super.initState();
+    }
+
+    int _selectedIndex = 0;
+    final menuScreens = [
+      HomeNews(),
+      RecipesWidget(),
+    ];
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -66,6 +56,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           backgroundColor: Colors.transparent,
           elevation: 0.0,
+        ),
+        bottomNavigationBar: GNav(
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+          gap: 8,
+          iconSize: 50,
+          activeColor: Colors.greenbrand,
+          tabs: [
+            GButton(icon: Icons.newspaper, text: 'News'),
+            GButton(icon: Icons.food_bank, text: 'Recipes'),
+          ],
+          selectedIndex: _selectedIndex,
+          onTabChange: (index) {
+            setState(() {
+              _selectedIndex = index;
+              print(_selectedIndex);
+            });
+          },
         ),
         body: SingleChildScrollView(
             child: Container(
@@ -78,7 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 padding: const EdgeInsets.all(15),
                 child: Column(
-                  children: [HomeNews()],
+                  children: [
+                    menuScreens[_selectedIndex],
+                    Text('Value (in parent) = $_selectedIndex')
+                  ],
                 ))));
   }
 }
