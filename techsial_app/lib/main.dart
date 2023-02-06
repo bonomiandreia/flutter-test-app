@@ -112,8 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Expanded(
                   child: Container(
+                      color: Colors.white,
                       margin: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 10.0),
+                          horizontal: 20.0, vertical: 16.0),
                       child: ListView(children: [
                         ...answers.map<Widget>((array) {
                           return Container(
