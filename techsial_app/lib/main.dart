@@ -117,12 +117,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           horizontal: 20.0, vertical: 16.0),
                       child: ListView(children: [
                         ...answers.map<Widget>((array) {
+                          var index = answers.indexOf(array);
                           return Container(
                             child: Column(children: [
                               Image(
                                   image: NetworkImage(
                                       array['urlToImage'].toString())),
-                              Text(array['title'].toString())
+                              Text(array['title'].toString()),
+                              Text(index.toString())
                             ]),
                           );
                         }).toList()
