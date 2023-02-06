@@ -111,33 +111,14 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 10.0),
-                    child: ListView(
-                      children: answers
-                          .map(
-                            (array) => Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(0)),
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Image(
-                                    image: NetworkImage(
-                                        array['urlToImage'] as String),
-                                  ),
-                                  Text(array['title'].toString()),
-                                ],
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    )),
-              ),
+                  child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 10.0),
+                      child: ListView(children: [
+                        ...answers.map<Widget>((array) {
+                          return Container();
+                        }).toList()
+                      ])))
             ],
           )),
       // This trailing comma makes auto-formatting nicer for build methods.
