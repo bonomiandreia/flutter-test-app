@@ -79,8 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: const EdgeInsets.all(15),
                 child: Column(
                   children: [HomeNews()],
-                )))
-        // This trailing comma makes auto-formatting nicer for build methods.
-        );
+                ))));
   }
 }
