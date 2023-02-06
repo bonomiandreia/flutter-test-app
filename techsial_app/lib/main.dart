@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:techsial_app/home.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -57,117 +59,28 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     listArticles = listOfArrays['articles'];
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: TextStyle(color: Colors.greenbrand.shade900),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
-      body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.white, Colors.greenbrand.shade100],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+        appBar: AppBar(
+          title: Text(
+            widget.title,
+            style: TextStyle(color: Colors.greenbrand.shade900),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                  child: Container(
-                      color: Colors.white,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 16.0),
-                      child: ListView(children: [
-                        ...listArticles.map<Widget>((array) {
-                          var index = listArticles.indexOf(array);
-                          if (index == 0) {
-                            return Row(
-                              children: [
-                                Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color:
-                                              Color.fromARGB(255, 23, 38, 31),
-                                          border: Border(
-                                              bottom: BorderSide(
-                                                  width: 1,
-                                                  color: Colors
-                                                      .greenbrand.shade50))),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            child: Image(
-                                              image: NetworkImage(
-                                                  array['urlToImage']
-                                                      .toString()),
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.all(25.0),
-                                            child: Text(
-                                              array['title'],
-                                              style: TextStyle(
-                                                fontSize: 25,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                              ],
-                            );
-                          }
-                          return Row(
-                            children: [
-                              Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(15),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Image(
-                                          image: NetworkImage(
-                                              array['urlToImage'].toString()),
-                                          fit: BoxFit.fill,
-                                          height: 70,
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                              Expanded(
-                                  flex: 3,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(
-                                          array['title'],
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ))
-                            ],
-                          );
-                        }).toList()
-                      ])))
-            ],
-          )),
-      // This trailing comma makes auto-formatting nicer for build methods.
-    );
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+        ),
+        body: SingleChildScrollView(
+            child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.white, Colors.greenbrand.shade100],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                padding: const EdgeInsets.all(15),
+                child: Column(
+                  children: [HomeNews()],
+                )))
+        // This trailing comma makes auto-formatting nicer for build methods.
+        );
   }
 }
