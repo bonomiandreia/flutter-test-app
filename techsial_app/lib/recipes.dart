@@ -3,7 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class RecipesWidget extends StatefulWidget {
-  const RecipesWidget({super.key});
+  const RecipesWidget({super.key, required this.title});
+
+  final String title;
 
   @override
   State<RecipesWidget> createState() => _RecipesWidget();

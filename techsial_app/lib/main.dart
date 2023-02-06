@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.greenbrand,
       ),
-      home: const MyHomePage(title: 'NEWS'),
+      home: const MyHomePage(title: 'HEALTHY FOOD'),
     );
   }
 }
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final menuScreens = [
       HomeNews(),
-      RecipesWidget(),
+      const RecipesWidget(title: 'RECIPES'),
     ];
 
     return Scaffold(
