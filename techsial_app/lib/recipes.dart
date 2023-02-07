@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:techsial_app/recipe.dart';
+
 class RecipesWidget extends StatefulWidget {
   @override
   State<RecipesWidget> createState() => _RecipesWidget();
@@ -167,7 +169,15 @@ class _RecipesWidget extends State<RecipesWidget> {
             child: Column(children: [
           ...listArticles.map((array) {
             return GestureDetector(
-                onTap: () => print(array['id'].toString()),
+                onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RecipeWidget(
+                                  id: array['id'].toString(),
+                                )),
+                      )
+                    },
                 child: Row(
                   children: [
                     Expanded(
