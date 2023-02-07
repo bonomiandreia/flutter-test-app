@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final menuScreens = [
       HomeNews(),
-      const RecipesWidget(title: 'RECIPES'),
+      RecipesWidget(),
     ];
 
     return Scaffold(
