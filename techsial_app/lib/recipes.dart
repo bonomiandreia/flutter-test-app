@@ -144,7 +144,7 @@ class _RecipesWidget extends State<RecipesWidget> {
 
   void _getDataListNews() async {
     final response = await http.get(Uri.parse(
-        'https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=a275424604ae48368a0cb5a90f2bdeb7'));
+        'https://api.spoonacular.com/recipes/complexSearch?cuisine=healthy&maxFat=25&number=10&apiKey=1c7ac727518846feb8b4fb66a0992d1b&includeNutrition=true&sort=calories'));
     if (response.statusCode == 200) {
       setState(() {
         listOfArrays = json.decode(response.body);
@@ -164,79 +164,153 @@ class _RecipesWidget extends State<RecipesWidget> {
     return Container(
       child: Column(children: [
         SingleChildScrollView(
-          child: Column(children: [
-            ...listArticles.map<Widget>((array) {
-              return Row(children: [
-                Expanded(
-                    child: Container(
-                  child: InkWell(
-                    child: Row(
-                        // Row content
-                        ),
-                    onTap: () => {print("Card tapped.")},
-                  ),
-                  height: 200,
-                  margin: const EdgeInsets.all(15),
-                  padding: const EdgeInsets.all(25),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
-                    image: DecorationImage(
-                        colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.4), BlendMode.darken),
-                        image: NetworkImage(array['image'].toString()),
-                        fit: BoxFit.cover),
-                  ),
-                  child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(array['title'].toString(),
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Text(
-                                  _transformList(
-                                      array['nutrition']['nutrients'][0]
-                                          ['name'],
-                                      array['nutrition']['nutrients'][0]
-                                          ['amount'],
-                                      array['nutrition']['nutrients'][0]
-                                          ['unit']),
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.white),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 5),
-                                child: Text(
-                                    _transformList(
-                                        array['nutrition']['nutrients'][1]
-                                            ['name'],
-                                        array['nutrition']['nutrients'][1]
-                                            ['amount'],
-                                        array['nutrition']['nutrients'][1]
-                                            ['unit']),
-                                    style: TextStyle(
-                                        fontSize: 15, color: Colors.white)),
-                              )
-                            ],
-                          ),
-                        )
-                      ]),
-                ))
-              ]);
-            })
-          ]),
-        )
+            child: Column(children: [
+          ...listArticles.map((array) {
+            return GestureDetector(
+                onTap: () => print(array['id'].toString()),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Container(
+                            height: 200,
+                            margin: const EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(25),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(25)),
+                                image: DecorationImage(
+                                    colorFilter: ColorFilter.mode(
+                                        Colors.black.withOpacity(0.4),
+                                        BlendMode.darken),
+                                    image:
+                                        NetworkImage(array['image'].toString()),
+                                    fit: BoxFit.cover)),
+                            child: Row(children: [
+                              Flexible(
+                                  child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(array['title'],
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      )),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Text(
+                                        _transformList(
+                                            array['nutrition']['nutrients'][1]
+                                                ['name'],
+                                            array['nutrition']['nutrients'][1]
+                                                ['amount'],
+                                            array['nutrition']['nutrients'][1]
+                                                ['unit']),
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.white,
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Text(
+                                        _transformList(
+                                            array['nutrition']['nutrients'][0]
+                                                ['name'],
+                                            array['nutrition']['nutrients'][0]
+                                                ['amount'],
+                                            array['nutrition']['nutrients'][0]
+                                                ['unit']),
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.white,
+                                        )),
+                                  )
+                                ],
+                              ))
+                            ])))
+                  ],
+                ));
+          })
+        ]))
       ]),
     );
   }
 }
+
+// return Row(children: [
+//                 Expanded(
+//                     child: Container(
+//                   height: 200,
+//                   margin: const EdgeInsets.all(15),
+//                   padding: const EdgeInsets.all(25),
+//                   decoration: BoxDecoration(
+//                     color: Colors.white,
+//                     borderRadius: const BorderRadius.all(Radius.circular(25)),
+//                     image: DecorationImage(
+//                         colorFilter: ColorFilter.mode(
+//                             Colors.black.withOpacity(0.4), BlendMode.darken),
+//                         image: NetworkImage(array['image'].toString()),
+//                         fit: BoxFit.cover),
+//                   ),
+//                   child: Row(
+//                       crossAxisAlignment: CrossAxisAlignment.end,
+//                       children: [
+//                         Flexible(
+//                           child: Column(
+//                             crossAxisAlignment: CrossAxisAlignment.start,
+//                             children: [
+//                               Text(array['title'].toString(),
+//                                   style: TextStyle(
+//                                     fontSize: 20,
+//                                     fontWeight: FontWeight.bold,
+//                                     color: Colors.white,
+//                                   )),
+//                               Padding(
+//                                 padding: const EdgeInsets.only(top: 10),
+//                                 child: Text(
+//                                   _transformList(
+//                                       array['nutrition']['nutrients'][0]
+//                                           ['name'],
+//                                       array['nutrition']['nutrients'][0]
+//                                           ['amount'],
+//                                       array['nutrition']['nutrients'][0]
+//                                           ['unit']),
+//                                   style: TextStyle(
+//                                       fontSize: 15, color: Colors.white),
+//                                 ),
+//                               ),
+//                               Padding(
+//                                 padding: const EdgeInsets.only(top: 5),
+//                                 child: Text(
+//                                     _transformList(
+//                                         array['nutrition']['nutrients'][1]
+//                                             ['name'],
+//                                         array['nutrition']['nutrients'][1]
+//                                             ['amount'],
+//                                         array['nutrition']['nutrients'][1]
+//                                             ['unit']),
+//                                     style: TextStyle(
+//                                         fontSize: 15, color: Colors.white)),
+//                               )
+//                             ],
+//                           ),
+//                         )
+//                       ]),
+//                 ))
+//               ]);
+//             })
+
+//             //          crossAxisAlignment: CrossAxisAlignment.end,
+//             // children: [
+//             //   Text(array['title'].toString(),
+//             //       style: TextStyle(
+//             //         fontSize: 20,
+//             //         fontWeight: FontWeight.bold,
+//             //         color: Colors.white,
+//             //       )),
+//             // ],
+//           ]),
+// //         )
