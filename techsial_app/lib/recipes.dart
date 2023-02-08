@@ -207,7 +207,7 @@ class _RecipesWidget extends State<RecipesWidget> {
                                         color: Colors.white,
                                       )),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 10),
+                                    padding: const EdgeInsets.only(top: 30),
                                     child: Text(
                                         _transformList(
                                             array['nutrition']['nutrients'][1]
