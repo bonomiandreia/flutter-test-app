@@ -38,7 +38,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                   width: double.infinity,
                 ),
                 Container(
-                  padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                  padding: const EdgeInsets.only(top: 5, left: 15, right: 15),
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(25)),
                       color: Colors.white,
@@ -59,24 +59,41 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                       Flexible(
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                             Text(widget.recipeSelected['title'],
                                 style: const TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 25,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 )),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('ok ',
+                                Text(
+                                    transform_list.Transform_Data()
+                                        .transformList(
+                                            widget.recipeSelected['nutrition']
+                                                ['nutrients'][0]['name'],
+                                            widget.recipeSelected['nutrition']
+                                                ['nutrients'][0]['amount'],
+                                            widget.recipeSelected['nutrition']
+                                                ['nutrients'][0]['unit']),
                                     style: const TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 13,
                                       color: Colors.black,
                                     )),
-                                Text('ok',
+                                Text(
+                                    transform_list.Transform_Data()
+                                        .transformList(
+                                            widget.recipeSelected['nutrition']
+                                                ['nutrients'][1]['name'],
+                                            widget.recipeSelected['nutrition']
+                                                ['nutrients'][1]['amount'],
+                                            widget.recipeSelected['nutrition']
+                                                ['nutrients'][1]['unit']),
                                     style: const TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 15,
                                       color: Colors.black,
                                     ))
                               ],
@@ -88,7 +105,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               ],
             ),
             Row(
-              children: [],
+              children: [Text('ok!')],
             )
           ],
         ),
