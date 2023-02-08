@@ -174,7 +174,7 @@ class _RecipesWidget extends State<RecipesWidget> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => RecipeWidget(
-                                  id: array['id'].toString(),
+                                  recipeSelected: array,
                                 )),
                       )
                     },
@@ -201,7 +201,7 @@ class _RecipesWidget extends State<RecipesWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(array['title'],
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
@@ -216,7 +216,7 @@ class _RecipesWidget extends State<RecipesWidget> {
                                                 ['amount'],
                                             array['nutrition']['nutrients'][1]
                                                 ['unit']),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.normal,
                                           color: Colors.white,
@@ -232,7 +232,7 @@ class _RecipesWidget extends State<RecipesWidget> {
                                                 ['amount'],
                                             array['nutrition']['nutrients'][0]
                                                 ['unit']),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.normal,
                                           color: Colors.white,
@@ -249,78 +249,3 @@ class _RecipesWidget extends State<RecipesWidget> {
     );
   }
 }
-
-// return Row(children: [
-//                 Expanded(
-//                     child: Container(
-//                   height: 200,
-//                   margin: const EdgeInsets.all(15),
-//                   padding: const EdgeInsets.all(25),
-//                   decoration: BoxDecoration(
-//                     color: Colors.white,
-//                     borderRadius: const BorderRadius.all(Radius.circular(25)),
-//                     image: DecorationImage(
-//                         colorFilter: ColorFilter.mode(
-//                             Colors.black.withOpacity(0.4), BlendMode.darken),
-//                         image: NetworkImage(array['image'].toString()),
-//                         fit: BoxFit.cover),
-//                   ),
-//                   child: Row(
-//                       crossAxisAlignment: CrossAxisAlignment.end,
-//                       children: [
-//                         Flexible(
-//                           child: Column(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: [
-//                               Text(array['title'].toString(),
-//                                   style: TextStyle(
-//                                     fontSize: 20,
-//                                     fontWeight: FontWeight.bold,
-//                                     color: Colors.white,
-//                                   )),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 10),
-//                                 child: Text(
-//                                   _transformList(
-//                                       array['nutrition']['nutrients'][0]
-//                                           ['name'],
-//                                       array['nutrition']['nutrients'][0]
-//                                           ['amount'],
-//                                       array['nutrition']['nutrients'][0]
-//                                           ['unit']),
-//                                   style: TextStyle(
-//                                       fontSize: 15, color: Colors.white),
-//                                 ),
-//                               ),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 5),
-//                                 child: Text(
-//                                     _transformList(
-//                                         array['nutrition']['nutrients'][1]
-//                                             ['name'],
-//                                         array['nutrition']['nutrients'][1]
-//                                             ['amount'],
-//                                         array['nutrition']['nutrients'][1]
-//                                             ['unit']),
-//                                     style: TextStyle(
-//                                         fontSize: 15, color: Colors.white)),
-//                               )
-//                             ],
-//                           ),
-//                         )
-//                       ]),
-//                 ))
-//               ]);
-//             })
-
-//             //          crossAxisAlignment: CrossAxisAlignment.end,
-//             // children: [
-//             //   Text(array['title'].toString(),
-//             //       style: TextStyle(
-//             //         fontSize: 20,
-//             //         fontWeight: FontWeight.bold,
-//             //         color: Colors.white,
-//             //       )),
-//             // ],
-//           ]),
-// //         )
