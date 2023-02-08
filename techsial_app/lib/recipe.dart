@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import './tools/transform-list.dart' as transform_list;
+import 'dart:convert';
+
+class ScreenArguments {
+  final String id;
+
+  ScreenArguments(this.id);
+}
 
 class RecipeWidget extends StatefulWidget {
   const RecipeWidget({super.key, required this.recipeSelected});
@@ -12,8 +19,33 @@ class RecipeWidget extends StatefulWidget {
 }
 
 class _RecipeWidgetState extends State<RecipeWidget> {
+  List<dynamic> modePrepare = [];
+
+  var listSteps = [];
+
+  void initState() {
+    super.initState();
+    _getDataListRecipe(widget.recipeSelected['id']);
+  }
+
+  void _getDataListRecipe(id) async {
+    final response = await http.get(Uri.parse(
+        'https://api.spoonacular.com/recipes/$id/analyzedInstructions?apiKey=1c7ac727518846feb8b4fb66a0992d1b&stepBreakdown=false'));
+    if (response.statusCode == 200) {
+      setState(() {
+        modePrepare = json.decode(response.body);
+      });
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (modePrepare != null && modePrepare.length > 0) {
+      listSteps = modePrepare[0]['steps'] ?? [];
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -97,7 +129,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                                               widget.recipeSelected['nutrition']
                                                   ['nutrients'][0]['unit']),
                                       style: const TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         color: Colors.white,
                                       )),
                                   SizedBox(
@@ -113,7 +145,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                                               widget.recipeSelected['nutrition']
                                                   ['nutrients'][1]['unit']),
                                       style: const TextStyle(
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         color: Colors.white,
                                       )),
                                 ],
@@ -136,12 +168,76 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         )),
-                    Flexible(
-                        child: Column(
-                      children: [],
-                    ))
                   ]),
-                )
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Flexible(
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                        top: 20, left: 30, right: 30, bottom: 30),
+                    child: Column(
+                      children: [
+                        if (listSteps.isEmpty) ...[
+                          Container(
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 4, horizontal: 14),
+                              child: Text(
+                                  'ERROR! we cant display this information now ):'))
+                        ],
+                        ...listSteps.map((array) {
+                          return Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(60)),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.2),
+                                          spreadRadius: 3,
+                                          blurRadius: 10,
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ]),
+                                  width: 40,
+                                  height: 40,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      array['number'].toString(),
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.greenbrand),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 8,
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 4, horizontal: 14),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 10),
+                                  child: Text(array['step'].toString(),
+                                      style: TextStyle(fontSize: 15)),
+                                ),
+                              )
+                            ],
+                          );
+                        })
+                      ],
+                    ),
+                  ),
+                ),
               ],
             )
           ],

@@ -146,10 +146,10 @@ class _RecipesWidget extends State<RecipesWidget> {
 
   void _getDataListNews() async {
     final response = await http.get(Uri.parse(
-        'https://api.spoonacular.com/recipes/complexSearch?cuisine=healthy&maxFat=25&number=10&apiKey=1c7ac727518846feb8b4fb66a0992d1b&includeNutrition=true&sort=calories'));
+        'https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=a275424604ae48368a0cb5a90f2bdeb7'));
     if (response.statusCode == 200) {
       setState(() {
-        listOfArrays = json.decode(response.body);
+        // listOfArrays = json.decode(response.body);
       });
     } else {
       throw Exception('Failed to load data');
