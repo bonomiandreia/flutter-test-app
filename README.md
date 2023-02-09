@@ -25,7 +25,7 @@ The `import 'package:http/http.dart` is a library of dart that can make http req
 
 
 ## Apis used
-NewsAPI newsapi.org - News Api of varied news, in this case of project, about healthy.
+- NewsAPI newsapi.org - News Api of varied news, in this case of project, about healthy.
 - spoonacular: API of recipes and nutritional info.
 
 
