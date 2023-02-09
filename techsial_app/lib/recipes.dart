@@ -201,9 +201,7 @@ class _RecipesWidget extends State<RecipesWidget> {
       if (!preventCall) {
         if (test < 2) {
           addMoreItems += 5;
-          // if (test < 1) {
           callListRecipes().then((_) => preventCall = false);
-          //}
 
           preventCall = true;
         }
