@@ -1,6 +1,6 @@
 # flutter-test-app
 
-This is a app test and a process of learning about Flutter, The framework created by google to facilitate the criations of applications, since that it's compile the code in a native way in android or iOs.
+This is a app test and a process of learning about Flutter, the framework created by google to facilitate the creation of applications, since that it's compile the code in a native way in android or iOs.
 
 
 
