@@ -156,7 +156,7 @@ class _RecipesWidget extends State<RecipesWidget> {
     });
   }
 
-  Future yourFuture() async {
+  Future callListRecipes() async {
     if (_hasNextPage == true &&
         _isFirstLoadRunning == false &&
         _isLoadMoreRunning == false) {
@@ -202,7 +202,7 @@ class _RecipesWidget extends State<RecipesWidget> {
         if (test < 2) {
           addMoreItems += 5;
           // if (test < 1) {
-          yourFuture().then((_) => preventCall = false);
+          callListRecipes().then((_) => preventCall = false);
           //}
 
           preventCall = true;
