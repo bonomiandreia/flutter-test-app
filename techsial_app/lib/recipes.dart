@@ -12,10 +12,134 @@ class RecipesWidget extends StatefulWidget {
 
 class _RecipesWidget extends State<RecipesWidget> {
   var test = 0;
+  List listOfArrays = [
+    {
+      "id": 637923,
+      "title": "Chicken and Penne Pasta With Garlic Rosemary Sauce",
+      "image": "https://spoonacular.com/recipeImages/637923-312x231.jpg",
+      "imageType": "jpg",
+      "nutrition": {
+        "nutrients": [
+          {"name": "Fat", "amount": 17.7995, "unit": "g"},
+          {"name": "Calories", "amount": 884.268, "unit": "kcal"}
+        ]
+      }
+    },
+    {
+      "id": 1095802,
+      "title": "Fettuccine with shrimp, mussels and cherry tomatoes",
+      "image": "https://spoonacular.com/recipeImages/1095802-312x231.jpg",
+      "imageType": "jpg",
+      "nutrition": {
+        "nutrients": [
+          {"name": "Fat", "amount": 17.7026, "unit": "g"},
+          {"name": "Calories", "amount": 814.73, "unit": "kcal"}
+        ]
+      }
+    },
+    {
+      "id": 1098240,
+      "title": "Lemon Fresh Spaghetti with Garden Sauce & Pumpkin Flowers",
+      "image": "https://spoonacular.com/recipeImages/1098240-312x231.jpg",
+      "imageType": "jpg",
+      "nutrition": {
+        "nutrients": [
+          {"name": "Fat", "amount": 24.1583, "unit": "g"},
+          {"name": "Calories", "amount": 812.401, "unit": "kcal"}
+        ]
+      }
+    },
+    {
+      "id": 637326,
+      "title": "Cavatelli with Chicken Sausage and Kale",
+      "image": "https://spoonacular.com/recipeImages/637326-312x231.jpg",
+      "imageType": "jpg",
+      "nutrition": {
+        "nutrients": [
+          {"name": "Fat", "amount": 23.0044, "unit": "g"},
+          {"name": "Calories", "amount": 809.113, "unit": "kcal"}
+        ]
+      }
+    },
+    {
+      "id": 1096241,
+      "title": "Spaghetti with Peas, Mushrooms, and Tomato Sauce",
+      "image": "https://spoonacular.com/recipeImages/1096241-312x231.jpg",
+      "imageType": "jpg",
+      "nutrition": {
+        "nutrients": [
+          {"name": "Fat", "amount": 21.0347, "unit": "g"},
+          {"name": "Calories", "amount": 804.226, "unit": "kcal"}
+        ]
+      }
+    },
+    {
+      "id": 650397,
+      "title": "Low Fat Fettuccine Alfredo With Fiddleheads",
+      "image": "https://spoonacular.com/recipeImages/650397-312x231.jpg",
+      "imageType": "jpg",
+      "nutrition": {
+        "nutrients": [
+          {"name": "Fat", "amount": 14.8432, "unit": "g"},
+          {"name": "Calories", "amount": 803.821, "unit": "kcal"}
+        ]
+      }
+    },
+    {
+      "id": 662075,
+      "title": "Stuffed Pork Tenderloin with Marsala-Port Sauce",
+      "image": "https://spoonacular.com/recipeImages/662075-312x231.jpg",
+      "imageType": "jpg",
+      "nutrition": {
+        "nutrients": [
+          {"name": "Fat", "amount": 22.3432, "unit": "g"},
+          {"name": "Calories", "amount": 783.697, "unit": "kcal"}
+        ]
+      }
+    },
+    {
+      "id": 663051,
+      "title": "Tex-Mex Tilapia Bowl",
+      "image": "https://spoonacular.com/recipeImages/663051-312x231.jpg",
+      "imageType": "jpg",
+      "nutrition": {
+        "nutrients": [
+          {"name": "Fat", "amount": 11.5368, "unit": "g"},
+          {"name": "Calories", "amount": 783.406, "unit": "kcal"}
+        ]
+      }
+    },
+    {
+      "id": 645646,
+      "title": "Grilled Chicken Gyros With Tzatziki",
+      "image": "https://spoonacular.com/recipeImages/645646-312x231.jpg",
+      "imageType": "jpg",
+      "nutrition": {
+        "nutrients": [
+          {"name": "Fat", "amount": 22.4637, "unit": "g"},
+          {"name": "Calories", "amount": 777.911, "unit": "kcal"}
+        ]
+      }
+    },
+    {
+      "id": 643634,
+      "title": "Macaroni with Fresh Tomatoes and Beans",
+      "image": "https://spoonacular.com/recipeImages/643634-312x231.jpg",
+      "imageType": "jpg",
+      "nutrition": {
+        "nutrients": [
+          {"name": "Fat", "amount": 24.1392, "unit": "g"},
+          {"name": "Calories", "amount": 773.762, "unit": "kcal"}
+        ]
+      }
+    }
+  ];
   void _firstLoad() async {
+    print('_firstLoad');
     setState(() {
       _isFirstLoadRunning = false;
     });
+    _posts = listOfArrays;
     try {
       final res = await http.get(Uri.parse(
           "https://api.spoonacular.com/recipes/complexSearch?cuisine=healthy&maxFat=25&number=$addMoreItems&apiKey=1c7ac727518846feb8b4fb66a0992d1b&includeNutrition=true"));
@@ -48,20 +172,21 @@ class _RecipesWidget extends State<RecipesWidget> {
         var fetchedPosts = json.decode(res.body);
         if (fetchedPosts.isNotEmpty) {
           setState(() {
+            //List copy = new List.from(listOfArrays);
+            // print(copy);
             var len = fetchedPosts['results']?.length ?? 0;
             if (len != 0) {
               _posts.addAll(fetchedPosts['results']);
+              //_posts = [_posts, ...listOfArrays['results']];
             }
           });
         } else {
           setState(() {
-            _posts = [];
             _hasNextPage = false;
           });
         }
       } catch (err) {
         print(err);
-        _posts = [];
       }
 
       setState(() {
@@ -74,12 +199,14 @@ class _RecipesWidget extends State<RecipesWidget> {
     var position = scroll.position.pixels;
     if (position >= scroll.position.maxScrollExtent) {
       if (!preventCall) {
-        addMoreItems += 5;
-        if (test < 1) {
+        if (test < 2) {
+          addMoreItems += 5;
+          // if (test < 1) {
           yourFuture().then((_) => preventCall = false);
-        }
+          //}
 
-        preventCall = true;
+          preventCall = true;
+        }
       }
     } else {
       addMoreItems = 10;
@@ -104,9 +231,8 @@ class _RecipesWidget extends State<RecipesWidget> {
     super.dispose();
   }
 
-  List _posts = [];
   var listArticles = [];
-
+  List _posts = [];
   int addMoreItems = 10;
   final int _limit = 20;
   bool _hasNextPage = true;
@@ -115,134 +241,6 @@ class _RecipesWidget extends State<RecipesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Map listOfArrays = {
-      "results": [
-        {
-          "id": 637923,
-          "title": "Chicken and Penne Pasta With Garlic Rosemary Sauce",
-          "image": "https://spoonacular.com/recipeImages/637923-312x231.jpg",
-          "imageType": "jpg",
-          "nutrition": {
-            "nutrients": [
-              {"name": "Fat", "amount": 17.7995, "unit": "g"},
-              {"name": "Calories", "amount": 884.268, "unit": "kcal"}
-            ]
-          }
-        },
-        {
-          "id": 1095802,
-          "title": "Fettuccine with shrimp, mussels and cherry tomatoes",
-          "image": "https://spoonacular.com/recipeImages/1095802-312x231.jpg",
-          "imageType": "jpg",
-          "nutrition": {
-            "nutrients": [
-              {"name": "Fat", "amount": 17.7026, "unit": "g"},
-              {"name": "Calories", "amount": 814.73, "unit": "kcal"}
-            ]
-          }
-        },
-        {
-          "id": 1098240,
-          "title": "Lemon Fresh Spaghetti with Garden Sauce & Pumpkin Flowers",
-          "image": "https://spoonacular.com/recipeImages/1098240-312x231.jpg",
-          "imageType": "jpg",
-          "nutrition": {
-            "nutrients": [
-              {"name": "Fat", "amount": 24.1583, "unit": "g"},
-              {"name": "Calories", "amount": 812.401, "unit": "kcal"}
-            ]
-          }
-        },
-        {
-          "id": 637326,
-          "title": "Cavatelli with Chicken Sausage and Kale",
-          "image": "https://spoonacular.com/recipeImages/637326-312x231.jpg",
-          "imageType": "jpg",
-          "nutrition": {
-            "nutrients": [
-              {"name": "Fat", "amount": 23.0044, "unit": "g"},
-              {"name": "Calories", "amount": 809.113, "unit": "kcal"}
-            ]
-          }
-        },
-        {
-          "id": 1096241,
-          "title": "Spaghetti with Peas, Mushrooms, and Tomato Sauce",
-          "image": "https://spoonacular.com/recipeImages/1096241-312x231.jpg",
-          "imageType": "jpg",
-          "nutrition": {
-            "nutrients": [
-              {"name": "Fat", "amount": 21.0347, "unit": "g"},
-              {"name": "Calories", "amount": 804.226, "unit": "kcal"}
-            ]
-          }
-        },
-        {
-          "id": 650397,
-          "title": "Low Fat Fettuccine Alfredo With Fiddleheads",
-          "image": "https://spoonacular.com/recipeImages/650397-312x231.jpg",
-          "imageType": "jpg",
-          "nutrition": {
-            "nutrients": [
-              {"name": "Fat", "amount": 14.8432, "unit": "g"},
-              {"name": "Calories", "amount": 803.821, "unit": "kcal"}
-            ]
-          }
-        },
-        {
-          "id": 662075,
-          "title": "Stuffed Pork Tenderloin with Marsala-Port Sauce",
-          "image": "https://spoonacular.com/recipeImages/662075-312x231.jpg",
-          "imageType": "jpg",
-          "nutrition": {
-            "nutrients": [
-              {"name": "Fat", "amount": 22.3432, "unit": "g"},
-              {"name": "Calories", "amount": 783.697, "unit": "kcal"}
-            ]
-          }
-        },
-        {
-          "id": 663051,
-          "title": "Tex-Mex Tilapia Bowl",
-          "image": "https://spoonacular.com/recipeImages/663051-312x231.jpg",
-          "imageType": "jpg",
-          "nutrition": {
-            "nutrients": [
-              {"name": "Fat", "amount": 11.5368, "unit": "g"},
-              {"name": "Calories", "amount": 783.406, "unit": "kcal"}
-            ]
-          }
-        },
-        {
-          "id": 645646,
-          "title": "Grilled Chicken Gyros With Tzatziki",
-          "image": "https://spoonacular.com/recipeImages/645646-312x231.jpg",
-          "imageType": "jpg",
-          "nutrition": {
-            "nutrients": [
-              {"name": "Fat", "amount": 22.4637, "unit": "g"},
-              {"name": "Calories", "amount": 777.911, "unit": "kcal"}
-            ]
-          }
-        },
-        {
-          "id": 643634,
-          "title": "Macaroni with Fresh Tomatoes and Beans",
-          "image": "https://spoonacular.com/recipeImages/643634-312x231.jpg",
-          "imageType": "jpg",
-          "nutrition": {
-            "nutrients": [
-              {"name": "Fat", "amount": 24.1392, "unit": "g"},
-              {"name": "Calories", "amount": 773.762, "unit": "kcal"}
-            ]
-          }
-        }
-      ],
-      "offset": 0,
-      "number": 10,
-      "totalResults": 3574
-    };
-    _posts = listOfArrays['results'] ?? [];
     return Container(
         child: Column(children: [
       SingleChildScrollView(
