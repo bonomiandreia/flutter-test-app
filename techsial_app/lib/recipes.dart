@@ -49,7 +49,6 @@ class _RecipesWidget extends State<RecipesWidget> {
         if (fetchedPosts.isNotEmpty) {
           setState(() {
             var len = fetchedPosts['results']?.length ?? 0;
-
             if (len != 0) {
               _posts.addAll(fetchedPosts['results']);
             }
@@ -59,7 +58,7 @@ class _RecipesWidget extends State<RecipesWidget> {
             _posts = [];
             _hasNextPage = false;
           });
-        
+        }
       } catch (err) {
         print(err);
         _posts = [];
