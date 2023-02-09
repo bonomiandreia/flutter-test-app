@@ -13,7 +13,7 @@ This is a app test and a process of learning about Flutter, the framework create
 
 ## Events
 - O `addListener` is used to listen events that happen on screen, in this test case, the infinity scroll but it can use to listen inputs or buttons.
-- `OnTap` is used to listen clicks of buttons os items.
+- `OnTap` is used to listen clicks of buttons and items.
 
 ## Grid
 `Container` is all that includes many items as `Rows` and `Columns`, they are the structure of a component. 
