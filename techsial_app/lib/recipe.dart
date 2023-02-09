@@ -25,7 +25,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 
   void initState() {
     super.initState();
-    _getDataListRecipe(widget.recipeSelected['id']);
+    // _getDataListRecipe(widget.recipeSelected['id']);
   }
 
   void _getDataListRecipe(id) async {
