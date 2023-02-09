@@ -30,8 +30,6 @@ class _RecipesWidget extends State<RecipesWidget> {
     setState(() {
       _isFirstLoadRunning = false;
     });
-
-    print(_isFirstLoadRunning);
   }
 
   Future yourFuture() async {
@@ -41,10 +39,8 @@ class _RecipesWidget extends State<RecipesWidget> {
       setState(() {
         _isLoadMoreRunning = true;
       });
-
+      print(addMoreItems);
       test += 1;
-      print(
-          "https://api.spoonacular.com/recipes/complexSearch?cuisine=healthy&maxFat=25&number=$addMoreItems&apiKey=1c7ac727518846feb8b4fb66a0992d1b&includeNutrition=true&sortt=calories");
       try {
         final res = await http.get(Uri.parse(
             "https://api.spoonacular.com/recipes/complexSearch?cuisine=healthy&maxFat=25&number=$addMoreItems&apiKey=1c7ac727518846feb8b4fb66a0992d1b&includeNutrition=true&sortt=calories"));
@@ -52,15 +48,21 @@ class _RecipesWidget extends State<RecipesWidget> {
         var fetchedPosts = json.decode(res.body);
         if (fetchedPosts.isNotEmpty) {
           setState(() {
-            _posts.addAll(fetchedPosts['results']);
+            var len = fetchedPosts['results']?.length ?? 0;
+
+            if (len != 0) {
+              _posts.addAll(fetchedPosts['results']);
+            }
           });
         } else {
           setState(() {
+            _posts = [];
             _hasNextPage = false;
           });
-        }
+        
       } catch (err) {
         print(err);
+        _posts = [];
       }
 
       setState(() {
@@ -94,7 +96,7 @@ class _RecipesWidget extends State<RecipesWidget> {
     scroll.addListener(onScroll);
 
     super.initState();
-    // _firstLoad();
+    _firstLoad();
   }
 
   @override
