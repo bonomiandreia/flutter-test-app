@@ -1,6 +1,11 @@
 # flutter-test-app
+![ezgif-2-63551ca5fe](https://user-images.githubusercontent.com/39713034/218083553-5c6020fd-bc42-407f-9141-ab6ef1e74f39.gif)
+![good2](https://user-images.githubusercontent.com/39713034/218084285-290fcce6-66dc-4be8-b4f6-74cb54f06415.gif)
+![good3](https://user-images.githubusercontent.com/39713034/218084575-aa86f345-21f0-43b9-b426-f4870e28242b.gif)
+
 
 This is a app poc and a process of learning about Flutter, the framework created by google to facilitate the creation of applications, since it compiles the code in a native way in android or iOs.
+
 
 
 
