@@ -11,7 +11,7 @@ This is a app poc and a process of learning about Flutter, the framework created
 
 # Topics
 
-##Life Cycle
+## Life Cycle
 
 - `setState` method: Used to notify internally other elements(e.g. a father object), that an object has updated its status.
 - `InitState` method: Used when the component starts.
